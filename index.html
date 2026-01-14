@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Resume Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:wght@300;400;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              serif: ['Merriweather', 'serif'],
+              mono: ['JetBrains Mono', 'monospace'],
+            },
+            colors: {
+              slate: {
+                850: '#1e293b',
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      /* Custom scrollbar for the editor */
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: #1e1e1e; 
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #4b5563; 
+        border-radius: 4px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background: #6b7280; 
+      }
+      
+      @media print {
+        @page {
+          margin: 1.5cm 1cm 1.5cm 1cm;
+          size: letter;
+        }
+        @page:first {
+          margin-top: 1cm;
+        }
+        html, body {
+          background: white !important;
+          margin: 0 !important;
+          padding: 0 !important;
+          height: auto !important;
+          width: 100% !important;
+          overflow: visible !important;
+        }
+        #root {
+          height: auto !important;
+          width: 100% !important;
+          overflow: visible !important;
+          display: block !important;
+        }
+        #root > div {
+          display: block !important;
+          height: auto !important;
+          overflow: visible !important;
+        }
+        .no-print {
+          display: none !important;
+        }
+        .print-only {
+          display: block !important;
+        }
+        /* Preview pane - make it full width and remove flex constraints */
+        .preview-pane {
+          position: static !important;
+          width: 100% !important;
+          height: auto !important;
+          overflow: visible !important;
+          display: block !important;
+          padding: 0 !important;
+          background: white !important;
+        }
+        /* Resume canvas - remove scroll container */
+        .resume-canvas {
+          overflow: visible !important;
+          height: auto !important;
+          padding: 0 !important;
+          display: block !important;
+          background: white !important;
+        }
+        .print-container {
+          transform: none !important;
+          width: 100% !important;
+          min-height: auto !important;
+          height: auto !important;
+          box-shadow: none !important;
+          margin: 0 !important;
+          position: static !important;
+        }
+
+        /* Page break controls */
+
+        /* Allow page breaks in experience section (it's usually long) */
+        .experience-section {
+          page-break-inside: auto !important;
+          break-inside: auto !important;
+        }
+
+        /* But keep individual job entries together */
+        .job-entry {
+          page-break-inside: avoid !important;
+          break-inside: avoid !important;
+          page-break-after: auto;
+        }
+
+        /* Keep other sections together if possible */
+        section:not(.experience-section) {
+          page-break-inside: avoid !important;
+          break-inside: avoid !important;
+        }
+
+        /* Keep headings with their content */
+        h1, h2, h3, h4, h5, h6 {
+          page-break-after: avoid !important;
+          break-after: avoid !important;
+        }
+
+        /* Keep list items together */
+        li {
+          page-break-inside: avoid !important;
+          break-inside: avoid !important;
+        }
+
+        /* Keep bullet lists together with their parent */
+        ul, ol {
+          page-break-before: avoid !important;
+          break-before: avoid !important;
+        }
+
+        /* Avoid orphans and widows */
+        p, li {
+          orphans: 3;
+          widows: 3;
+        }
+
+        /* Ensure background colors print */
+        * {
+          -webkit-print-color-adjust: exact !important;
+          print-color-adjust: exact !important;
+        }
+      }
+
+      /* Page number footer - shown only in print */
+      .page-footer {
+        display: none;
+      }
+      @media print {
+        .page-footer {
+          display: block;
+          position: fixed;
+          bottom: 0.5cm;
+          left: 0;
+          right: 0;
+          text-align: center;
+          font-size: 10pt;
+          color: #666;
+        }
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "js-yaml": "https://esm.sh/js-yaml@^4.1.1"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body class="bg-gray-100 text-gray-900 overflow-hidden">
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>

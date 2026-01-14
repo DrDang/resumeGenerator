@@ -1,0 +1,5 @@
+{
+  "name": "Resume Generator",
+  "description": "A real-time, aesthetically pleasing resume generator featuring live YAML/JSON editing, multiple themes, and ATS-optimized PDF export.",
+  "requestFramePermissions": []
+}
