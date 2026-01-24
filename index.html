@@ -43,11 +43,11 @@
       
       @media print {
         @page {
-          margin: 1.5cm 1cm 1.5cm 1cm;
+          margin: 0.75cm 0.75cm 0.75cm 0.75cm;
           size: letter;
         }
         @page:first {
-          margin-top: 1cm;
+          margin-top: 0.5cm;
         }
         html, body {
           background: white !important;
@@ -99,7 +99,41 @@
           height: auto !important;
           box-shadow: none !important;
           margin: 0 !important;
+          padding: 0.5cm !important;
           position: static !important;
+        }
+
+        /* Compact spacing for print */
+        .print-container section {
+          margin-bottom: 0.4rem !important;
+        }
+        .print-container .space-y-6 > * + * {
+          margin-top: 0.75rem !important;
+        }
+        .print-container .space-y-3 > * + * {
+          margin-top: 0.4rem !important;
+        }
+        .print-container .space-y-2 > * + * {
+          margin-top: 0.25rem !important;
+        }
+        .print-container header {
+          margin-bottom: 0.5rem !important;
+          padding-bottom: 0.4rem !important;
+        }
+        .print-container .mb-6 {
+          margin-bottom: 0.5rem !important;
+        }
+        .print-container .mb-8 {
+          margin-bottom: 0.6rem !important;
+        }
+        .print-container .mb-4 {
+          margin-bottom: 0.3rem !important;
+        }
+        .print-container .pb-6 {
+          padding-bottom: 0.4rem !important;
+        }
+        .print-container .p-12 {
+          padding: 0.25cm !important;
         }
 
         /* Page break controls */
@@ -117,10 +151,10 @@
           page-break-after: auto;
         }
 
-        /* Keep other sections together if possible */
-        section:not(.experience-section) {
-          page-break-inside: avoid !important;
-          break-inside: avoid !important;
+        /* Allow all sections to break - content flow is more important than keeping sections whole */
+        section {
+          page-break-inside: auto !important;
+          break-inside: auto !important;
         }
 
         /* Keep headings with their content */
@@ -143,8 +177,8 @@
 
         /* Avoid orphans and widows */
         p, li {
-          orphans: 3;
-          widows: 3;
+          orphans: 2;
+          widows: 2;
         }
 
         /* Ensure background colors print */
@@ -152,22 +186,28 @@
           -webkit-print-color-adjust: exact !important;
           print-color-adjust: exact !important;
         }
-      }
 
-      /* Page number footer - shown only in print */
-      .page-footer {
-        display: none;
-      }
-      @media print {
+        /* Prevent blank last page */
+        .print-container {
+          padding-bottom: 0 !important;
+        }
+        .print-container > div {
+          padding-bottom: 0 !important;
+          margin-bottom: 0 !important;
+        }
+        .print-container section:last-of-type {
+          margin-bottom: 0 !important;
+          padding-bottom: 0 !important;
+        }
+        .print-container > div > section:last-child,
+        .print-container > div > div:last-child {
+          margin-bottom: 0 !important;
+          padding-bottom: 0 !important;
+        }
+
+        /* Hide page footer to prevent extra page */
         .page-footer {
-          display: block;
-          position: fixed;
-          bottom: 0.5cm;
-          left: 0;
-          right: 0;
-          text-align: center;
-          font-size: 10pt;
-          color: #666;
+          display: none !important;
         }
       }
     </style>
